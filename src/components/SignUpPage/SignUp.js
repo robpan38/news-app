@@ -11,6 +11,8 @@ import {
 import { useState } from "react";
 
 const SignUp = ({ handleSignUp }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [userRole, setUserRole] = useState("null");
 
   return (
@@ -42,12 +44,16 @@ const SignUp = ({ handleSignUp }) => {
         }}
       >
         <TextField
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           sx={{ marginBottom: 2 }}
           id="outlined-basic"
           label="Enter username"
           variant="outlined"
         />
         <TextField
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           type="password"
           id="outlined-basic"
           label="Password"
@@ -63,7 +69,13 @@ const SignUp = ({ handleSignUp }) => {
         </Select>
         <Button
           sx={{ marginLeft: 2 }}
-          onClick={handleSignUp}
+          onClick={() =>
+            handleSignUp({
+              username: username,
+              password: password,
+              role: userRole,
+            })
+          }
           variant="contained"
         >
           Sign Up
