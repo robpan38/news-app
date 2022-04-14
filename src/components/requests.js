@@ -21,6 +21,7 @@ const addArticle = (article) => {
     .post(url + "news", {
       title: article.title,
       content: article.content,
+      tags: article.tags
     })
     .then((response) => response.data);
 

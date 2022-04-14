@@ -232,6 +232,7 @@ const NewsPage = ({
               const addedArticle = handleAddArticle({
                 title: articleTitle,
                 content: articleContent,
+                tags: []
               });
 
               addedArticle.then((data) => {
