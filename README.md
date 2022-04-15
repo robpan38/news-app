@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+Autor:
+    nume: Pandele
+    prenume: Robert-Andrei
+    numar telefon: 0736944414
+    email: r.pandele39@gmail.com
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+aplicatia este hostata aici:
+    https://cheery-unicorn-66c534.netlify.app/
 
-## Available Scripts
+instructiuni instalare dependinte:
+    1) asigura-te ca ai npm instalat
+    2) npm install in folder-ul cu package.json
+    3) npm start pentru a rula aplicatia local
+    4) intra pe localhost:3000 pentru a vedea aplicatia
 
-In the project directory, you can run:
+tehnologii folosite in implementarea aplicatiei (react):
+    1) create-react-app pentru obtinerea unei schelet de cod
+    pentru o aplicatie web care este construita cu react
+    2) material-ui pentru a usura procesul de implementare a
+    componentelor din aplicatie
+    3) inline css pentru styling
+    4) axios librarie folosita pentru realizarea requesturilor
+    GET, POST, PUT
 
-### `npm start`
+arhitectura aplicatie:
+    1) primul pas in rezolvarea task-ului a constat in realizarea
+    diferitelor "view-uri"(componente) ale aplicatiei (pagina de login, pagina de sign-up, componenta unui articol, pagina in care sunt prezentate toate articolele, pagina in care este adaugat un articol) fara a introduce functionalitate
+    
+    2) urmatorul pas a fost implementarea procesului de login/sign-up;
+    pentru rezolvarea acestei cerinte am folosit un rest api fake
+    https://mockapi.io/clone/6256d2426ea70370054001bd (pentru a vedea structura acestuia, se creeaza cont pe mockapi.io si se cloneaza
+    rest api-ul)
+    api-ul are rutele:
+    /api/login - folosita la login
+    /api/users - aici salvez userii care isi creeaza un cont
+    /api/news - aici salvez diferitele stiri din aplicatie
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    proces login: 
+        user-ul trimite request de tip POST la /api/login,
+        iar serverul trimite raspuns cu body-ul request-ului trimis de client (username si password);
+        apoi clientul trimite un request de tip GET la /api/users si obtine intreaga lista de useri (nu e tocmai ok din punct de vedere al securitatii);
+        astfel avem username-ul din request-ul de login si lista cu toti userii aplicatiei; se parcurge lista de useri pana gasim
+        userul al carui username coincide cu cel al clientului care
+        vrea sa se conecteze si setam id-ul si rolul acestuia pentru
+        urmatoarele interactiuni cu aplicatia
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    3) odata ce userul este logat, el are acces la diferitele stiri
+    postate de jurnalistii aplicatiei
+        - daca rolul acestuia este reader: el nu are optiunea de a adauga alte stiri in aplicatie
+        - daca rolul acestuia este journalist: el poate adauga alte
+        stiri in aplicatie
+            jurnalistii adauga stiri trimitand request-uri de tip
+            POST la /api/news cu titlul articolului, body-ul articolului si lista goala de tag-uri ale articolului
+        - reader-ul introduce un nou tag trimitand un request PUT
+        cu noua lista de tag-uri a articolului care sufera o modificare
+        de tag-uri la /api/news/{article_id}
+    
+    4) functia de refresh doar trimite un nou request de tip GET la
+    /api/news/, de fiecare data cand butonul este apasat
