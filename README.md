@@ -1,8 +1,6 @@
 Autor:
     nume: Pandele
     prenume: Robert-Andrei
-    numar telefon: 0736944414
-    email: r.pandele39@gmail.com
 
 aplicatia este hostata aici:
     https://cheery-unicorn-66c534.netlify.app/
